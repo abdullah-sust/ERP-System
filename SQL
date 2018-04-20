@@ -1,0 +1,106 @@
+CREATE TABLE `customer_invoice`(
+	id int AUTO_INCREMENT PRIMARY KEY,
+	customer varchar(40),
+	invoice_date varchar(40),
+	number varchar(40),
+	salesperson varchar(40),
+	due_date varchar(40) DEFAULT '12/12/2018',
+	source_document varchar(40),
+	payment_terms  varchar(40) DEFAULT NULL,
+	status varchar(40) DEFAULT 'Draft',
+	created_on DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP
+);
+ALTER TABLE `customer_invoice`  ADD updated_on DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP; 
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('','','','','','','');
+
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('A','12/12/2012','XVXZ-1111','Administrator','20/12/2012','NULL','Draft');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('B','22/12/2012','XVXZ-2222','Demo User','30/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('C','01/12/2013','XVXZ-3333','Demo User','30/01/2013','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('D','01/12/2013','XVXZ-4444','Administrator','20/12/2012','NULL','Draft');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('E','01/12/2013','XVXZ-5555','Administrator','30/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('F','01/12/2013','XVXZ-6666','Demo User','30/12/2012','NULL','Draft');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('G','01/12/2013','XVXZ-7777','Demo User','20/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('H','01/12/2013','XVXZ-8888','Demo User','30/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('I','01/12/2013','XVXZ-9999','Administrator','30/01/2013','NULL','Draft');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('J','01/12/2013','XVXZ-0000','Demo User','20/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('K','01/12/2013','XVXZ-1212','Demo User','30/12/2012','NULL','Open');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('L','01/12/2013','XVXZ-1313','Administrator','30/01/2013','NULL','Draft');
+INSERT INTO `customer_invoice`(`customer`, `invoice_date`, `number`, `salesperson`, `due_date`, `source_document`, `status`) VALUES ('M','01/12/2013','XVXZ-1414','Demo User','20/12/2012','NULL','Open');
+
+Pagination, Invoice update, Product create Completed (^_^)
+
+HEAD:refs/for/10727_Awal
+
+
+
+
+CREATE TABLE `product`(
+	id int AUTO_INCREMENT PRIMARY KEY,
+	customer_id int,
+	FOREIGN KEY (customer_id) REFERENCES `customer_invoice`(id),
+	product varchar(400) DEFAULT NULL,
+	description  varchar(400) DEFAULT NULL,
+	quantity double DEFAULT 0,
+	unit_price double DEFAULT 0,
+	amount double DEFAULT 0,
+	total double DEFAULT 0,
+	created_on DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP
+);
+ALTER TABLE `product`  ADD updated_on DATETIME NOT NULL ON UPDATE CURRENT_TIMESTAMP; 
+
+INSERT INTO `product`(`customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (1,"asasas","dzx",50000,2332.3,100000,1212121222222223);
+
+
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[CARD] Graphics Card","",5,10,50,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[C-Case] Computer Case","",6,10,60,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[CONS_DEL01] Server","",7,10,70,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[CONS_DEL02] Little server","",8,10,80,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[CONS_DEL03] Basic Computer","",9,10,90,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[CPUi5] Processor Core i5 2.70 Ghz","",4,10,40,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (50,"[E-COM01] iPad Retina Display (White, 16 GB)","",3,10,30,0.00);
+
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[CARD] Graphics Card","",5,10,50,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[C-Case] Computer Case","",6,10,60,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[CONS_DEL01] Server","",7,10,70,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[CONS_DEL02] Little server","",8,10,80,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[CONS_DEL03] Basic Computer","",9,10,90,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[CPUi5] Processor Core i5 2.70 Ghz","",4,10,40,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (49,"[E-COM01] iPad Retina Display (White, 16 GB)","",3,10,30,0.00);
+
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[CARD] Graphics Card","",5,10,50,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[C-Case] Computer Case","",6,10,60,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[CONS_DEL01] Server","",7,10,70,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[CONS_DEL02] Little server","",8,10,80,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[CONS_DEL03] Basic Computer","",9,10,90,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[CPUi5] Processor Core i5 2.70 Ghz","",4,10,40,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (48,"[E-COM01] iPad Retina Display (White, 16 GB)","",3,10,30,0.00);
+
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[CARD] Graphics Card","",5,10,50,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[C-Case] Computer Case","",6,10,60,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[CONS_DEL01] Server","",7,10,70,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[CONS_DEL02] Little server","",8,10,80,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[CONS_DEL03] Basic Computer","",9,10,90,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[CPUi5] Processor Core i5 2.70 Ghz","",4,10,40,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (47,"[E-COM01] iPad Retina Display (White, 16 GB)","",3,10,30,0.00);
+
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[CARD] Graphics Card","",5,10,50,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[C-Case] Computer Case","",6,10,60,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[CONS_DEL01] Server","",7,10,70,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[CONS_DEL02] Little server","",8,10,80,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[CONS_DEL03] Basic Computer","",9,10,90,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[CPUi5] Processor Core i5 2.70 Ghz","",4,10,40,0.00);
+INSERT INTO `product`( `customer_id`, `product`, `description`, `quantity`, `unit_price`, `amount`, `total`) VALUES (46,"[E-COM01] iPad Retina Display (White, 16 GB)","",3,10,30,0.00);
+
+UPDATE `product` SET `description`="[CONS_DEL02] Little server raid 10 2048ECC ram" WHERE `id`%2=1;
+UPDATE `product` SET `description`="[CONS_DEL03] Basic Computer Dvorak keyboard left-handed mouse" WHERE `id`%2=0;
+
+[CARD] Graphics Card
+[C-Case] Computer Case
+[CONS_DEL01] Server
+[CONS_DEL02] Little server
+[CONS_DEL03] Basic Computer
+[CPUi5] Processor Core i5 2.70 Ghz
+[E-COM01] iPad Retina Display (White, 16 GB)
+
+
+
